@@ -11,7 +11,7 @@ before_install:
  # - mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost';"
  # - mysql -u root -e 'CREATE DATABASE lportal;'
 
-install: 
+install:
   - npm run lerna
 
 language: node_js
@@ -28,18 +28,18 @@ addons:
 git:
     depth: 1
 
-jdk: 
+jdk:
   - oraclejdk8
 
 jobs:
-    include: 
-        
+    include:
+
         # - stage: javascript format tests
 
         #   script: npm run ci
 
         - stage: generator liferay bundle test
-        
+
           before_script:
                 - "export DISPLAY=:99.0"
                 - "sh -e /etc/init.d/xvfb start"
@@ -51,7 +51,7 @@ jobs:
                 #- sh ./setup.sh deploy-portlets
                 - cd $GENERATOR_DIR/qa
 
-          script: travis_wait 40 sh ./setup.sh start-and-run
+          script: travis_wait 40 sh -c ./setup.sh start-and-run
 
 services:
   - mysql
