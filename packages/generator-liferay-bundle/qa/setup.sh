@@ -65,9 +65,6 @@ elif [ "$1" = "run-poshi-test" ] ; then
     echo run-poshi-test
     wait-on -t 600000 http://localhost:8080
     ./gradlew -b standalone-poshi.gradle -PposhiRunnerExtPropertyFileNames=poshi-runner.properties runPoshi
-    #cd liferay-portal-master/tomcat-*/bin
-    #sh ./shutdown.sh
-
 
 else
     echo "Usage: setup.sh ( commands ... )"

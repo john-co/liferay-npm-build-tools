@@ -10,9 +10,6 @@ before_install:
   - sudo service mysql restart
   - mysql -e 'CREATE DATABASE lportal char set utf8;'
   - mysql -e 'SHOW DATABASES;'
- # - mysql -u root -e "CREATE USER ''@'localhost' IDENTIFIED BY '';"
- # - mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost';"
- # - mysql -u root -e 'CREATE DATABASE lportal;'
 
 install:
   - npm run lerna
@@ -57,9 +54,9 @@ jobs:
                 - cd $GENERATOR_DIR/qa
                 - sh ./setup.sh unzip-portal-snapshot-bundle
                 - sh ./setup.sh prepare-portal-properties
-                #- sh ./setup.sh config-portlets
-                #- sh ./setup.sh generate-samples
-                #- sh ./setup.sh deploy-portlets
+                - sh ./setup.sh config-portlets
+                - sh ./setup.sh generate-samples
+                - sh ./setup.sh deploy-portlets
                 - cd $GENERATOR_DIR/qa
                 - sh ./setup.sh sync-master-poshi-tests
 
