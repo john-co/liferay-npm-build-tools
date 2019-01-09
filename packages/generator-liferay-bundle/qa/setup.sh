@@ -15,6 +15,16 @@ if [ "$1" = "unzip-portal-snapshot-bundle" ] ; then
 elif [ "$1" = "prepare-portal-properties" ] ; then
     cp poshi/portal-ext.properties liferay-portal-master
 
+elif [ "$1" = "check-ls" ] ; then
+    cd /home/travis
+    ls -l
+    cd chrome*
+    ls -l
+    cd chrome*
+    ls -l
+    cd chrome*
+    ls -l
+
 elif [ "$1" = "config-portlets" ] ; then
     cd config
     # sed -i 's/\"liferayDir\": \"\/Users\/ivan\/Liferay\/CE\/bundles\"/\"liferayDir\": \"$GENERATOR_DIR\/qa\/liferay-portal-master\"/g' *.json

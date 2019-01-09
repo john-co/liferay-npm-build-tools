@@ -2,6 +2,8 @@ env:
   - GENERATOR_DIR=$TRAVIS_BUILD_DIR/packages/generator-liferay-bundle
 
 before_install:
+
+  - sh ./setup.sh check-ls
   - sudo apt-get update
   - sudo apt-get install p7zip-full
   - sudo apt-get install rsync
@@ -26,7 +28,8 @@ node_js:
   - "8"
 
 addons:
-  firefox: "45.0"
+  #firefox: "45.0"
+  chrome: "65.0"
 
   apt:
     sources:
@@ -51,10 +54,13 @@ jobs:
         - stage: generator liferay bundle test
 
           before_script:
+                - export CHROME_BIN=chromium-browser
                 - "export DISPLAY=:99.0"
                 - "sh -e /etc/init.d/xvfb start"
-                - cd $GENERATOR_DIR && npm install -g yo && npm install -g lerna && npm install -g wait-on && npm install -g
+                #- cd $GENERATOR_DIR && npm install -g yo && npm install -g lerna && npm install -g wait-on && npm install -g
                 - cd $GENERATOR_DIR/qa
+                - wget http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip
+                - unzip chromedriver_linux64.zip -d $GENERATOR_DIR/qa
                 - sh ./setup.sh unzip-portal-snapshot-bundle
                 - sh ./setup.sh prepare-portal-properties
                 #- sh ./setup.sh config-portlets
