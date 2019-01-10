@@ -34,6 +34,18 @@ elif [ "$1" = "start-and-run" ] ; then
     sh ./catalina.sh run &
     wait-on -t 600000 http://localhost:8080
     ./gradlew -b standalone-poshi.gradle -PposhiRunnerExtPropertyFileNames=poshi-runner.properties runPoshi
+    if [ $? -eq 1 ] ; then
+        echo "Exit code is 1"
+        cd liferay-portal-master/tomcat-*/bin
+        sh ./shutdown.sh
+        exit 1
+    else
+        echo "Exit code is not 1"
+        cd liferay-portal-master/tomcat-*/bin
+        sh ./shutdown.sh
+    fi
+
+elif [ "$1" = "start-and-run" ] ; then
     cd liferay-portal-master/tomcat-*/bin
     sh ./shutdown.sh
 
@@ -65,8 +77,16 @@ elif [ "$1" = "run-poshi-test" ] ; then
     echo run-poshi-test
     wait-on -t 600000 http://localhost:8080
     ./gradlew -b standalone-poshi.gradle -PposhiRunnerExtPropertyFileNames=poshi-runner.properties runPoshi
-    #cd liferay-portal-master/tomcat-*/bin
-    #sh ./shutdown.sh
+    if [ $? -eq 1 ] ; then
+        echo "Exit code is 1"
+        cd liferay-portal-master/tomcat-*/bin
+        sh ./shutdown.sh
+        exit 1
+    else
+        echo "Exit code is not 1"
+        cd liferay-portal-master/tomcat-*/bin
+        sh ./shutdown.sh
+    fi
 
 elif [ "$1" = "create-liferay-bundle-json" ] ; then
     FILE="$HOME/.generator-liferay-bundle.json"

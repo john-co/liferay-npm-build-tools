@@ -339,7 +339,7 @@
 	</command>
 
 	<command name="gotoAddFirstPage">
-		<var name="key_menuItem" value="${pageType}" />
+		<var name="key_menuItem" value="${pageTypess}" />
 
 		<execute function="Click" locator1="Dropdown#EMPTY_MESSAGE_DROPDOWN" />
 
