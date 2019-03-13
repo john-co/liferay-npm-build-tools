@@ -28,6 +28,8 @@ if not %ERRORLEVEL% == 0 (
 
 if exist "C:\Program Files\Mozilla Firefox\firefox.exe" (
     set FIREFOX=C:\/Program Files\/Mozilla Firefox\/firefox.exe
+) if else exist "C:\Program Files\Mozilla Firefox (x86)\firefox.exe" (
+    set FIREFOX=C:\/Program Files\/Mozilla Firefox (x86)\/firefox.exe
 ) else (
     echo "No Firefox executable found. Please install it or point the FIREFOX env var to its location."
     rem exit 1
@@ -44,6 +46,11 @@ if "%1" == "test-all-samples" (
     setup.bat clean
     setup.bat unzip-portal-snapshot-bundle
     setup.bat generate-samples
+    setup.bat deploy-portlets
+    setup.bat sync-master-poshi-tests
+    setup.bat generate-samples
+    setup.bat sample-list
+    setup.bat start-and-run
 )
 
 if "%1" == "clean" (
